@@ -232,7 +232,7 @@ class _RFTrialServiceScreenState extends State<RFTrialServiceScreen> {
                               Row(
                                 children: [
                                   Text(
-                                    '2+6525',
+                                    '${itemsSlected['listSer'][i]['Service']}',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15),
