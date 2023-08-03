@@ -1,0 +1,20 @@
+const CNY = "¥";
+const RFAppName = "BOOKING USASTARNAILS";
+const RFAppSubTitle = "Book Your Nail Appointment";
+const RFBaseUrl = "https://booking.usastarnails.com/index.php?r=service-booking/";
+const RFBaseLogin = "https://booking.usastarnails.com/index.php?r=service-booking/login";
+const RFBaseLogout = "https://tancang.andin.io/api/logout";
+const RFGetDataKhoiTao = "https://tancang.andin.io/api/get-data-khoi-tao";
+const RFSavePhieuTacNghiep = "https://tancang.andin.io/api/save-phieu-tac-nghiep";
+const RFSaveChiTietPhieuTacNghiep = "https://tancang.andin.io/api/save-chi-tiet-phieu-tac-nghiep";
+const RFBaseSignUp = "https://booking.usastarnails.com/index.php?r=service-booking/register";
+const RFSaveProfile ="https://tancang.andin.io/api/save-profile";
+const RFEditPass="https://tancang.andin.io/api/reset-password";
+const RFLogout ="https://tancang.andin.io/api/logout";
+const RFForgotPassWord =RFBaseUrl+"reset-password";
+const RFGetListBranch = 'https://booking.usastarnails.com/index.php?r=service-booking/get-branches';
+const RFGetListService = 'https://booking.usastarnails.com/index.php?r=service-booking/booking';
+const RFGetProFile ="https://tancang.andin.io/api/profile";
+
+const rf_noImgLink="https://tancang.andin.io/images/no-photo-available-icon-20.jpg";
+const textSizeSMedium = 14.0;
