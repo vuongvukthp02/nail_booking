@@ -4,12 +4,12 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="16"
-6-->C:\Users\mlcco\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml
+6-->C:\Users\Admin\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml
 7        android:targetSdkVersion="16" />
-7-->C:\Users\mlcco\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml
+7-->C:\Users\Admin\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml
 8    <!-- Required to fetch data from the internet for the futureSearchFn example. -->
 9    <uses-permission android:name="android.permission.INTERNET" />
-9-->C:\Users\mlcco\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml:4:5-67
-9-->C:\Users\mlcco\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml:4:22-64
+9-->C:\Users\Admin\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml:4:5-67
+9-->C:\Users\Admin\AppData\Local\Pub\Cache\hosted\pub.dev\search_choices-2.2.5\android\src\main\AndroidManifest.xml:4:22-64
 10
 11</manifest>

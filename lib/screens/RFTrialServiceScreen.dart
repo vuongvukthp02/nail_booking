@@ -5,10 +5,8 @@ import 'package:usastarnail/providers/Service.dart';
 import 'package:provider/provider.dart';
 import 'package:usastarnail/screens/RFCheckOutScreen.dart';
 
-import '../main.dart';
 import '../providers/Services.dart';
 import '../utils/RFColors.dart';
-import '../utils/RFWidget.dart';
 import '../widgets/SelectServiceDialog.dart';
 import 'RFEmailSignInScreen.dart';
 import 'RFResetPasswordScreen.dart';
@@ -29,7 +27,9 @@ class RFTrialServiceScreen extends StatefulWidget {
 
 class _RFTrialServiceScreenState extends State<RFTrialServiceScreen> {
   bool loading = false;
+  int itemLength = 0;
   late List<Service> services = [];
+  TextEditingController quantityController = TextEditingController(text: '1');
   List<Map<String, dynamic>> listServicesParent = [];
   List<Map<String, dynamic>> itemsService = [
     {
@@ -80,6 +80,14 @@ class _RFTrialServiceScreenState extends State<RFTrialServiceScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  num sum(dynamic items) {
+    num s = 0;
+    for (dynamic item in items) {
+      s += item['Price'];
+    }
+    return s;
   }
 
   Future<void> _reloadService(BuildContext context) async {
@@ -167,6 +175,10 @@ class _RFTrialServiceScreenState extends State<RFTrialServiceScreen> {
                                             print("value ${value}");
                                             setState(() {
                                               itemsSlected.addAll(value);
+                                              itemLength =
+                                                  itemsSlected['listSer']
+                                                      .length;
+                                              print(itemLength);
                                             });
                                           });
                                         },
@@ -199,144 +211,154 @@ class _RFTrialServiceScreenState extends State<RFTrialServiceScreen> {
             ),
             itemsSlected.isNotEmpty
                 ? Column(
-                  children: [
-                    (Container(
-              height: MediaQuery.of(context).size.height*0.2,
-                        width: context.width(),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: Offset(0, 3),
-                            ),
-                          ]
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text('Fullset Powder Gel with Normal Color', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),).paddingOnly(left: 10)
-                              ],
-                            ),
-                            10.height,
-                            Row(
-                              children: [
-                                Text('Time: 16:00 x').paddingOnly(left: 10),
-                                15.width,
-                                Container(
-                                  width: 25,
-                                  height: 18,
-                                  child: Text('1', textAlign: TextAlign.end),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.3),
-                                        spreadRadius: 5,
-                                        blurRadius: 7,
-                                        offset: Offset(0, 3),
-                                      )
-                                    ]
-                                  ),
-                                ),
-                                13.width,
-                                Text('x  From £38  =  '),
-                                10.width,
-                                Text('£38 ',style: TextStyle(color: Colors.red), ),
-                                5.width,
-                                GestureDetector(
-                                  onTap: (){},
-                                  child: Icon(Ionicons.trash, size: 14, color: Colors.red,),
-                                )
-                              ],
-                            ),
-                            20.height,
-                            Row(
-                              children: [
-                                Text('Time: 16:00 x').paddingOnly(left: 10),
-                                15.width,
-                                Container(
-                                  width: 25,
-                                  height: 18,
-                                  child: Text('1', textAlign: TextAlign.end),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 5,
-                                          blurRadius: 7,
-                                          offset: Offset(0, 3),
-                                        )
-                                      ]
-                                  ),
-                                ),
-                                13.width,
-                                Text('x  From £38  =  '),
-                                10.width,
-                                Text('£38 ',style: TextStyle(color: Colors.red), ),
-                                5.width,
-                                GestureDetector(
-                                  onTap: (){},
-                                  child: Icon(Ionicons.trash, size: 14, color: Colors.red,),
-                                )
-                              ],
-                            ),
-                            Divider(thickness: 1,).paddingOnly(left: 8, right: 8),
-                            10.height,
-                            Row(
-                              children: [
-                                Text('TOTAL: ', style: TextStyle(fontWeight: FontWeight.bold),).paddingOnly(left: 80),
-                                Text('2',style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
-                                Text('TOTAL:', style: TextStyle(fontWeight: FontWeight.bold)).paddingOnly(left: 50),
-                                Text('£76', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),).paddingOnly(left: 25)
-                              ],
-                            )
-                          ],
-                        ),
-                      )).paddingOnly(top: 20, left: 10, right: 10),
-                    30.height,
-                    Container(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RFCheckOutScreen(titleBranch: widget.titleBranch,)));
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height /13,
+                    children: [
+                      for (int i = 0; i < itemLength; i++)
+                        (Container(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: context.width(),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Color(0xffAC1D67),
+                              borderRadius: BorderRadius.circular(2),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ]),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    '2+6525',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ).paddingOnly(left: 10)
+                                ],
+                              ),
+                              10.height,
+                              for (var items in itemsSlected['listSer'])
+                                Row(
+                                  children: [
+                                    Text('Time: 16:00 x').paddingOnly(left: 10),
+                                    15.width,
+                                    Container(
+                                        width: 25,
+                                        height: 18,
+                                        child: TextField(
+                                          controller: quantityController,
+                                        )
+                                        //     Text('1', textAlign: TextAlign.end),
+                                        // decoration: BoxDecoration(
+                                        //     color: Colors.white,
+                                        //     boxShadow: [
+                                        //       BoxShadow(
+                                        //         color:
+                                        //             Colors.grey.withOpacity(0.3),
+                                        //         spreadRadius: 5,
+                                        //         blurRadius: 7,
+                                        //         offset: Offset(0, 3),
+                                        //       )
+                                        //     ]),
+                                        ),
+                                    13.width,
+                                    Text("x ${items['Price']}"),
+                                    10.width,
+                                    Text(
+                                      '= ${int.parse(quantityController.text) * items['Price']}',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    5.width,
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Icon(
+                                        Ionicons.trash,
+                                        size: 14,
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              20.height,
+                              Divider(
+                                thickness: 1,
+                              ).paddingOnly(left: 8, right: 8),
+                              10.height,
+                              Row(
+                                children: [
+                                  Text(
+                                    'TOTAL: ',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ).paddingOnly(left: 80),
+                                  Text(
+                                    '${int.parse(quantityController.text) * 2}',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text('TOTAL:',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold))
+                                      .paddingOnly(left: 50),
+                                  Text(
+                                    ' ${int.parse(quantityController.text) * sum(itemsSlected['listSer'])}',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
+                                  ).paddingOnly(left: 25)
+                                ],
+                              )
+                            ],
                           ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Booking Without Account',
-                              softWrap: true,
-                              style: TextStyle(color: Colors.white, fontSize: 15),
-                              textAlign: TextAlign.center,
+                        )).paddingOnly(top: 20, left: 10, right: 10),
+                      30.height,
+                      Container(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RFCheckOutScreen(
+                                          titleBranch: widget.titleBranch,
+                                        )));
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 13,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Color(0xffAC1D67),
                             ),
-                          ).paddingOnly(top: 3, bottom: 3),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Booking Without Account',
+                                softWrap: true,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                                textAlign: TextAlign.center,
+                              ),
+                            ).paddingOnly(top: 3, bottom: 3),
+                          ),
                         ),
-                      ),
-                    ).paddingOnly(left: 8, right: 8),
-                  ],
-                )
+                      ).paddingOnly(left: 8, right: 8),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                      )
+                    ],
+                  )
                 : SizedBox(),
           ],
-        ).paddingOnly(left:10, right: 10),
+        ).paddingOnly(left: 10, right: 10),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
-        height: MediaQuery.of(context).size.height * 0.24,
+        height: MediaQuery.of(context).size.height * 0.18,
         width: MediaQuery.of(context).size.width,
         child: Container(
           color: Colors.white,
